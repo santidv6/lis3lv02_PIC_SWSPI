@@ -62,6 +62,7 @@ typedef enum
     LIS3LV02_POWERDOWN,
     LIS3LV02_POWERON
 } lis3lv02_power_t;
+
 /**
  * @brief Output data rate setting
  */
@@ -73,28 +74,6 @@ typedef enum
     LIS3LV02_DATARATE_2560HZ
 } lis3lv02_datarate_t;
 
-///**
-// * @brief Fifo mode settings
-// */
-//typedef enum
-//{
-//    LIS3LV02_BYPASS,
-//    LIS3LV02_FIFO,
-//    LIS3LV02_STREAM,
-//    LIS3LV02_STREAM_TO_FIFO
-//} lis3lv02_fifo_mode_t;
-
-///**
-// * @brief Filter mode setting
-// */
-//typedef enum
-//{
-//    LIS3LV02_FILTER_MODE_NORMAL_W_RESET,
-//    LIS3LV02_FILTER_MODE_REFERENCE,
-//    LIS3LV02_FILTER_MODE_NORMAL,
-//    LIS3LV02_FILTER_MODE_AUTO_RESET
-//} lis3lv02_filter_mode_t;
-
 /**
  * @brief Accelerometer scale setting
  */
@@ -104,36 +83,54 @@ typedef enum
     LIS3LV02_SCALE_6G
 } lis3lv02_scale_t;
 
+/**
+ * @brief Update data mode setting
+ */
 typedef enum
 {
     LIS3LV02_CONTINUOUS,
     LIS3LV02_BLOCKED
 }lis3lv02_block_update_t;
 
+/**
+ * @brief Interrupt enable/disable
+ */
 typedef enum
 {
     LIS3LV02_INT_DISABLED,
     LIS3LV02_INT_ENABLED
 }lis3lv02_int_enable_t;
 
+/**
+ * @brief Data-ready generation enable/disable
+ */
 typedef enum
 {
     LIS3LV02_DRDY_DISABLED,
     LIS3LV02_DRDY_ENABLED
 }lis3lv02_drdy_enable_t;
 
+/**
+ * @brief SPI mode selection
+ */
 typedef enum
 {
     LIS3LV02_SPI_4W,
     LIS3LV02_SPI_3W
 }lis3lv02_spimode_t;
 
+/**
+ * @brief Fiter clock source selection
+ */
 typedef enum
 {
     LIS3LV02_INTERNAL_OSC,
     LIS3LV02_EXTERNAL_PAD
 }lis3lv02_clock_t;
 
+/**
+ * @brief Filter enable/disable
+ */
 typedef enum
 {
     LIS3LV02_FILTER_BYPASSED,
@@ -152,93 +149,27 @@ typedef enum
     LIS3LV02_FILTER_HPC_4096
 } lis3lv02_filter_freq_t;
 
-//functions
-/**
- * @brief
- * @return accelerometer ID
- */
 uint8_t lis3_getID();
-
-/**
- * @brief
- * @return 
- */
 bool lis3_begin();
 
-/**
- * @brief
- * @param power
- * @param datarate
- */
 void lis3_set_power_datarate(lis3lv02_power_t power, lis3lv02_datarate_t datarate);
 #define lis3_set_ctrl_reg1 lis3_set_power_datarate
 
-/**
- * @brief
- * @param scale
- * @param update
- * @param inte
- * @param drdy
- */
 void lis3_set_scale_update_int_drdy_spimode(lis3lv02_scale_t scale, lis3lv02_block_update_t update, lis3lv02_int_enable_t inte, lis3lv02_drdy_enable_t drdy, lis3lv02_spimode_t spimode);
 #define lis3_set_ctrl_reg2 lis3_set_scale_update_int_drdy_spimode
 
-/**
- * @brief
- * @param clock
- * @param dirdet
- * @param freefall
- * @param data
- * @param freq
- */
 void lis3_set_filter_options(lis3lv02_clock_t clock, lis3lv02_filter_enable_t dirdet, lis3lv02_filter_enable_t freefall, lis3lv02_filter_enable_t data, lis3lv02_filter_freq_t freq);
 #define lis3_set_ctrl_reg3 lis3_set_filter_options
 
-/**
- * @brief Reset HP_FILTER_RESET register
- */
 void lis3_reset_filter();
 
-/**
- * @brief Read STATUS_REG register content
- * @return
- */
 uint8_t lis3_read_status_reg();
 
-/**
- * @brief
- * @return x
- */
 int16_t lis3_get_acc_x();
-
-/**
- * @brief
- * @return y
- */
 int16_t lis3_get_acc_y();
-
-/**
- * @brief
- * @return z
- */
 int16_t lis3_get_acc_z();
-
-/**
- * @brief
- * @return x
- */
 int16_t lis3_get_acc_x16();
-
-/**
- * @brief
- * @return y
- */
 int16_t lis3_get_acc_y16();
-
-/**
- * @brief
- * @return z
- */
 int16_t lis3_get_acc_z16();
 #endif
 
