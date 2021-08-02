@@ -8,7 +8,7 @@
 #include "lis3lv02.h"
 
 /**
- * @brief function to get lis3lv02 device ID
+ * @brief Function to get lis3lv02 device ID
  * @return accelerometer ID
  */
 uint8_t lis3_getID(){
@@ -20,14 +20,14 @@ uint8_t lis3_getID(){
     return id;
 }
 /**
- * @brief function to initialize lis3lv02
- * @return 
+ * @brief Function to initialize lis3lv02
+ * @return true if the return of lis3_getID inside is the lis3lv02 device ID
  */
 bool lis3_begin(){
     return (lis3_getID() == LIS3_ID);
 }
 /**
- * @brief function to set power mode, data rate and enable all axis
+ * @brief Function to set power mode, data rate and enable all axis
  * @param power
  * @param datarate
  */
@@ -62,8 +62,15 @@ void lis3_set_power_datarate(lis3lv02_power_t power, lis3lv02_datarate_t datarat
  * @param inte
  * @param drdy
  */
-void lis3_set_scale_update_int_drdy_spimode(lis3lv02_scale_t scale, lis3lv02_block_update_t update, lis3lv02_int_enable_t inte, lis3lv02_drdy_enable_t drdy, lis3lv02_spimode_t spimode){
-    uint8_t wdata = 0x01;   //16 bit representation
+void lis3_set_scale_update_int_drdy_spimode_alignment(lis3lv02_scale_t scale, lis3lv02_block_update_t update, lis3lv02_int_enable_t inte, lis3lv02_drdy_enable_t drdy, lis3lv02_spimode_t spimode, lis3lv02_alignment_t alignment){
+    uint8_t wdata = 0x00;
+    switch(alignment){
+        case LIS3LV02_DATA_12R:
+            break;
+        case LIS3LV02_DATA_16L:
+            wdata = 0x01;
+            break;
+    }
     switch(scale){
         case LIS3LV02_SCALE_2G:
             break;
@@ -100,7 +107,7 @@ void lis3_set_scale_update_int_drdy_spimode(lis3lv02_scale_t scale, lis3lv02_blo
     SetCSSWSPI();
 }
 /**
- * @brief
+ * @brief Function to configure filter options
  * @param clock
  * @param dirdet
  * @param freefall
@@ -159,7 +166,7 @@ void lis3_reset_filter(){
 }
 /**
  * @brief Read STATUS_REG register content
- * @return
+ * @return status register data
  */
 uint8_t lis3_read_status_reg(){
     uint8_t rdata;
@@ -174,11 +181,15 @@ uint8_t lis3_read_status_reg(){
  * @return x
  */
 int16_t lis3_get_acc_x(){
-    uint16_t x;
+    int16_t x;
     ClearCSSWSPI();
     WriteSWSPI(OUTX_H | 0x80);
     x = WriteSWSPI(0x00);
+    SetCSSWSPI();
+    
     x <<= 8;
+    
+    ClearCSSWSPI();
     WriteSWSPI(OUTX_L | 0x80);
     x |= WriteSWSPI(0x00);
     SetCSSWSPI();
@@ -186,14 +197,42 @@ int16_t lis3_get_acc_x(){
 }
 /**
  * @brief
+ * @return x_HIGH
+ */
+int8_t lis3_get_acc_x_h(){
+    int8_t x_h;
+    ClearCSSWSPI();
+    WriteSWSPI(OUTX_H | 0x80);
+    x_h = WriteSWSPI(0x00);
+    SetCSSWSPI();
+    return x_h;
+}
+/**
+ * @brief
+ * @return x_LOW
+ */
+int8_t lis3_get_acc_x_l(){
+    int8_t x_l;
+    ClearCSSWSPI();
+    WriteSWSPI(OUTX_L | 0x80);
+    x_l = WriteSWSPI(0x00);
+    SetCSSWSPI();
+    return x_l;
+}
+/**
+ * @brief
  * @return y
  */
 int16_t lis3_get_acc_y(){
-    uint16_t y;
+    int16_t y;
     ClearCSSWSPI();
     WriteSWSPI(OUTY_H | 0x80);
     y = WriteSWSPI(0x00);
+    SetCSSWSPI();
+    
     y <<= 8;
+    
+    ClearCSSWSPI();
     WriteSWSPI(OUTY_L | 0x80);
     y |= WriteSWSPI(0x00);
     SetCSSWSPI();
@@ -201,18 +240,70 @@ int16_t lis3_get_acc_y(){
 }
 /**
  * @brief
+ * @return y_HIGH
+ */
+int8_t lis3_get_acc_y_h(){
+    int8_t y_h;
+    ClearCSSWSPI();
+    WriteSWSPI(OUTY_H | 0x80);
+    y_h = WriteSWSPI(0x00);
+    SetCSSWSPI();
+    return y_h;
+}
+/**
+ * @brief
+ * @return y_LOW
+ */
+int8_t lis3_get_acc_y_l(){
+    int8_t y_l;
+    ClearCSSWSPI();
+    WriteSWSPI(OUTY_L | 0x80);
+    y_l = WriteSWSPI(0x00);
+    SetCSSWSPI();
+    return y_l;
+}
+/**
+ * @brief
  * @return z
  */
 int16_t lis3_get_acc_z(){
-    uint16_t z;
+    int16_t z;
     ClearCSSWSPI();
     WriteSWSPI(OUTZ_H | 0x80);
     z = WriteSWSPI(0x00);
+    SetCSSWSPI();
+    
     z <<= 8;
+    
+    ClearCSSWSPI();
     WriteSWSPI(OUTZ_L | 0x80);
     z |= WriteSWSPI(0x00);
     SetCSSWSPI();
     return z;
+}
+/**
+ * @brief
+ * @return z_HIGH
+ */
+int8_t lis3_get_acc_z_h(){
+    int8_t z_h;
+    ClearCSSWSPI();
+    WriteSWSPI(OUTZ_H | 0x80);
+    z_h = WriteSWSPI(0x00);
+    SetCSSWSPI();
+    return z_h;
+}
+/**
+ * @brief
+ * @return z_LOW
+ */
+int8_t lis3_get_acc_z_l(){
+    int8_t z_l;
+    ClearCSSWSPI();
+    WriteSWSPI(OUTZ_L | 0x80);
+    z_l = WriteSWSPI(0x00);
+    SetCSSWSPI();
+    return z_l;
 }
 /**
  * @brief

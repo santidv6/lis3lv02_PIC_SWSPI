@@ -120,6 +120,15 @@ typedef enum
 }lis3lv02_spimode_t;
 
 /**
+ * @brief Data alignment selection
+ */
+typedef enum
+{
+    LIS3LV02_DATA_12R,
+    LIS3LV02_DATA_16L
+}lis3lv02_alignment_t;
+
+/**
  * @brief Fiter clock source selection
  */
 typedef enum
@@ -155,8 +164,8 @@ bool lis3_begin();
 void lis3_set_power_datarate(lis3lv02_power_t power, lis3lv02_datarate_t datarate);
 #define lis3_set_ctrl_reg1 lis3_set_power_datarate
 
-void lis3_set_scale_update_int_drdy_spimode(lis3lv02_scale_t scale, lis3lv02_block_update_t update, lis3lv02_int_enable_t inte, lis3lv02_drdy_enable_t drdy, lis3lv02_spimode_t spimode);
-#define lis3_set_ctrl_reg2 lis3_set_scale_update_int_drdy_spimode
+void lis3_set_scale_update_int_drdy_spimode_alignment(lis3lv02_scale_t scale, lis3lv02_block_update_t update, lis3lv02_int_enable_t inte, lis3lv02_drdy_enable_t drdy, lis3lv02_spimode_t spimode, lis3lv02_alignment_t alignment);
+#define lis3_set_ctrl_reg2 lis3_set_scale_update_int_drdy_spimode_alignment
 
 void lis3_set_filter_options(lis3lv02_clock_t clock, lis3lv02_filter_enable_t dirdet, lis3lv02_filter_enable_t freefall, lis3lv02_filter_enable_t data, lis3lv02_filter_freq_t freq);
 #define lis3_set_ctrl_reg3 lis3_set_filter_options
@@ -168,6 +177,12 @@ uint8_t lis3_read_status_reg();
 int16_t lis3_get_acc_x();
 int16_t lis3_get_acc_y();
 int16_t lis3_get_acc_z();
+int8_t lis3_get_acc_x_h();
+int8_t lis3_get_acc_y_h();
+int8_t lis3_get_acc_z_h();
+int8_t lis3_get_acc_x_l();
+int8_t lis3_get_acc_y_l();
+int8_t lis3_get_acc_z_l();
 int16_t lis3_get_acc_x16();
 int16_t lis3_get_acc_y16();
 int16_t lis3_get_acc_z16();
