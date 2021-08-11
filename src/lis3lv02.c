@@ -211,8 +211,8 @@ int8_t lis3_get_acc_x_h(){
  * @brief
  * @return x_LOW
  */
-int8_t lis3_get_acc_x_l(){
-    int8_t x_l;
+uint8_t lis3_get_acc_x_l(){
+    uint8_t x_l;
     ClearCSSWSPI();
     WriteSWSPI(OUTX_L | 0x80);
     x_l = WriteSWSPI(0x00);
@@ -254,8 +254,8 @@ int8_t lis3_get_acc_y_h(){
  * @brief
  * @return y_LOW
  */
-int8_t lis3_get_acc_y_l(){
-    int8_t y_l;
+uint8_t lis3_get_acc_y_l(){
+    uint8_t y_l;
     ClearCSSWSPI();
     WriteSWSPI(OUTY_L | 0x80);
     y_l = WriteSWSPI(0x00);
@@ -297,8 +297,8 @@ int8_t lis3_get_acc_z_h(){
  * @brief
  * @return z_LOW
  */
-int8_t lis3_get_acc_z_l(){
-    int8_t z_l;
+uint8_t lis3_get_acc_z_l(){
+    uint8_t z_l;
     ClearCSSWSPI();
     WriteSWSPI(OUTZ_L | 0x80);
     z_l = WriteSWSPI(0x00);
