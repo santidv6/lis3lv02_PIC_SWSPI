@@ -2,7 +2,7 @@
  * File:   lis3lv02.h
  * Author: Santiago Dominguez Vidal
  * Comments: simple lis3lv02 (SPI) library for basic usage
- * Revision history: 0.6 - 17/06/2021
+ * Revision history: 0.7 - 11/08/2021
  */
 
 #include <stdint.h>
@@ -174,15 +174,19 @@ void lis3_reset_filter();
 
 uint8_t lis3_read_status_reg();
 
+int8_t lis3_get_acc_x_h();
+uint8_t lis3_get_acc_x_l();
+
+int8_t lis3_get_acc_y_h();
+uint8_t lis3_get_acc_y_l();
+
+int8_t lis3_get_acc_z_h();
+uint8_t lis3_get_acc_z_l();
+
 int16_t lis3_get_acc_x();
 int16_t lis3_get_acc_y();
 int16_t lis3_get_acc_z();
-int8_t lis3_get_acc_x_h();
-int8_t lis3_get_acc_y_h();
-int8_t lis3_get_acc_z_h();
-uint8_t lis3_get_acc_x_l();
-uint8_t lis3_get_acc_y_l();
-uint8_t lis3_get_acc_z_l();
+
 int16_t lis3_get_acc_x16();
 int16_t lis3_get_acc_y16();
 int16_t lis3_get_acc_z16();

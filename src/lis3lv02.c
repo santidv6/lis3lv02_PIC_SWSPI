@@ -2,7 +2,7 @@
  * File:   lis3lv02.c
  * Author: Santiago Dominguez Vidal
  *
- * Created on 19 de mayo de 2021, 20:30
+ * Created on 19th May 2021
  */
 
 #include "lis3lv02.h"
@@ -178,25 +178,6 @@ uint8_t lis3_read_status_reg(){
 }
 /**
  * @brief
- * @return x
- */
-int16_t lis3_get_acc_x(){
-    int16_t x;
-    ClearCSSWSPI();
-    WriteSWSPI(OUTX_H | 0x80);
-    x = WriteSWSPI(0x00);
-    SetCSSWSPI();
-    
-    x <<= 8;
-    
-    ClearCSSWSPI();
-    WriteSWSPI(OUTX_L | 0x80);
-    x |= WriteSWSPI(0x00);
-    SetCSSWSPI();
-    return x;
-}
-/**
- * @brief
  * @return x_HIGH
  */
 int8_t lis3_get_acc_x_h(){
@@ -221,25 +202,6 @@ uint8_t lis3_get_acc_x_l(){
 }
 /**
  * @brief
- * @return y
- */
-int16_t lis3_get_acc_y(){
-    int16_t y;
-    ClearCSSWSPI();
-    WriteSWSPI(OUTY_H | 0x80);
-    y = WriteSWSPI(0x00);
-    SetCSSWSPI();
-    
-    y <<= 8;
-    
-    ClearCSSWSPI();
-    WriteSWSPI(OUTY_L | 0x80);
-    y |= WriteSWSPI(0x00);
-    SetCSSWSPI();
-    return y;
-}
-/**
- * @brief
  * @return y_HIGH
  */
 int8_t lis3_get_acc_y_h(){
@@ -261,25 +223,6 @@ uint8_t lis3_get_acc_y_l(){
     y_l = WriteSWSPI(0x00);
     SetCSSWSPI();
     return y_l;
-}
-/**
- * @brief
- * @return z
- */
-int16_t lis3_get_acc_z(){
-    int16_t z;
-    ClearCSSWSPI();
-    WriteSWSPI(OUTZ_H | 0x80);
-    z = WriteSWSPI(0x00);
-    SetCSSWSPI();
-    
-    z <<= 8;
-    
-    ClearCSSWSPI();
-    WriteSWSPI(OUTZ_L | 0x80);
-    z |= WriteSWSPI(0x00);
-    SetCSSWSPI();
-    return z;
 }
 /**
  * @brief
@@ -309,12 +252,66 @@ uint8_t lis3_get_acc_z_l(){
  * @brief
  * @return x
  */
+int16_t lis3_get_acc_x(){
+    int16_t x;
+    ClearCSSWSPI();
+    WriteSWSPI(OUTX_H | 0x80);
+    x = WriteSWSPI(0x00) << 4;
+    SetCSSWSPI();
+    
+    ClearCSSWSPI();
+    WriteSWSPI(OUTX_L | 0x80);
+    x |= (WriteSWSPI(0x00) >> 4);
+    SetCSSWSPI();
+    
+    return x;
+}
+/**
+ * @brief
+ * @return y
+ */
+int16_t lis3_get_acc_y(){
+    int16_t y;
+    ClearCSSWSPI();
+    WriteSWSPI(OUTY_H | 0x80);
+    y = WriteSWSPI(0x00) << 4;
+    SetCSSWSPI();
+    
+    ClearCSSWSPI();
+    WriteSWSPI(OUTY_L | 0x80);
+    y |= (WriteSWSPI(0x00) >> 4);
+    SetCSSWSPI();
+    
+    return y;
+}
+/**
+ * @brief
+ * @return z
+ */
+int16_t lis3_get_acc_z(){
+    int16_t z;
+    ClearCSSWSPI();
+    WriteSWSPI(OUTZ_H | 0x80);
+    z = WriteSWSPI(0x00) << 4;
+    SetCSSWSPI();
+    
+    ClearCSSWSPI();
+    WriteSWSPI(OUTZ_L | 0x80);
+    z |= (WriteSWSPI(0x00) >> 4);
+    SetCSSWSPI();
+    
+    return z;
+}
+/**
+ * @brief
+ * @return x
+ */
 int16_t lis3_get_acc_x16(){
-    uint16_t x;
+    int16_t x;
     ClearCSSWSPI();
     WriteSWSPI(OUTX_L | 0x80 | 0x40);
-    x = WriteSWSPI(0x00);
-    x |= (WriteSWSPI(0x00) << 8);
+    x = WriteSWSPI(0x00) >> 4;
+    x |= (WriteSWSPI(0x00) << 4);
     SetCSSWSPI();
     return x;
 }
@@ -323,11 +320,11 @@ int16_t lis3_get_acc_x16(){
  * @return y
  */
 int16_t lis3_get_acc_y16(){
-    uint16_t y;
+    int16_t y;
     ClearCSSWSPI();
     WriteSWSPI(OUTY_L | 0x80 | 0x40);
-    y = WriteSWSPI(0x00);
-    y |= (WriteSWSPI(0x00) << 8);
+    y = WriteSWSPI(0x00) >> 4;
+    y |= (WriteSWSPI(0x00) << 4);
     SetCSSWSPI();
     return y;
 }
@@ -336,11 +333,11 @@ int16_t lis3_get_acc_y16(){
  * @return z
  */
 int16_t lis3_get_acc_z16(){
-    uint16_t z;
+    int16_t z;
     ClearCSSWSPI();
     WriteSWSPI(OUTZ_L | 0x80 | 0x40);
-    z = WriteSWSPI(0x00);
-    z |= (WriteSWSPI(0x00) << 8);
+    z = WriteSWSPI(0x00) >> 4;
+    z |= (WriteSWSPI(0x00) << 4);
     SetCSSWSPI();
     return z;
 }
