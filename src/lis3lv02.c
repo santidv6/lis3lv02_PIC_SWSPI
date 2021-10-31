@@ -177,7 +177,7 @@ uint8_t lis3_read_status_reg(){
     return rdata;
 }
 /**
- * @brief
+ * @brief Function to read high-byte of X-axis acceleration
  * @return x_HIGH
  */
 int8_t lis3_get_acc_x_h(){
@@ -189,7 +189,7 @@ int8_t lis3_get_acc_x_h(){
     return x_h;
 }
 /**
- * @brief
+ * @brief Function to read low-byte of X-axis acceleration
  * @return x_LOW
  */
 uint8_t lis3_get_acc_x_l(){
@@ -201,7 +201,7 @@ uint8_t lis3_get_acc_x_l(){
     return x_l;
 }
 /**
- * @brief
+ * @brief Function to read high-byte of Y-axis acceleration
  * @return y_HIGH
  */
 int8_t lis3_get_acc_y_h(){
@@ -213,7 +213,7 @@ int8_t lis3_get_acc_y_h(){
     return y_h;
 }
 /**
- * @brief
+ * @brief Function to read low-byte of Y-axis acceleration
  * @return y_LOW
  */
 uint8_t lis3_get_acc_y_l(){
@@ -225,7 +225,7 @@ uint8_t lis3_get_acc_y_l(){
     return y_l;
 }
 /**
- * @brief
+ * @brief Function to read high-byte of Z-axis acceleration
  * @return z_HIGH
  */
 int8_t lis3_get_acc_z_h(){
@@ -237,7 +237,7 @@ int8_t lis3_get_acc_z_h(){
     return z_h;
 }
 /**
- * @brief
+ * @brief Function to read low-byte of Z-axis acceleration
  * @return z_LOW
  */
 uint8_t lis3_get_acc_z_l(){
@@ -249,7 +249,7 @@ uint8_t lis3_get_acc_z_l(){
     return z_l;
 }
 /**
- * @brief
+ * @brief Function to read X-axis acceleration (16 bit alignment only)
  * @return x
  */
 int16_t lis3_get_acc_x(){
@@ -267,7 +267,7 @@ int16_t lis3_get_acc_x(){
     return x;
 }
 /**
- * @brief
+ * @brief Function to read Y-axis acceleration (16 bit alignment only)
  * @return y
  */
 int16_t lis3_get_acc_y(){
@@ -285,7 +285,7 @@ int16_t lis3_get_acc_y(){
     return y;
 }
 /**
- * @brief
+ * @brief Function to read Z-axis acceleration (16 bit alignment only)
  * @return z
  */
 int16_t lis3_get_acc_z(){
@@ -303,7 +303,7 @@ int16_t lis3_get_acc_z(){
     return z;
 }
 /**
- * @brief
+ * @brief Function to read X-axis acceleration in 2 bytes reading (16 bit alignment only)
  * @return x
  */
 int16_t lis3_get_acc_x16(){
@@ -316,7 +316,7 @@ int16_t lis3_get_acc_x16(){
     return x;
 }
 /**
- * @brief
+ * @brief Function to read Y-axis acceleration in 2 bytes reading (16 bit alignment only)
  * @return y
  */
 int16_t lis3_get_acc_y16(){
@@ -329,7 +329,7 @@ int16_t lis3_get_acc_y16(){
     return y;
 }
 /**
- * @brief
+ * @brief Function to read Z-axis acceleration in 2 bytes reading (16 bit alignment only)
  * @return z
  */
 int16_t lis3_get_acc_z16(){

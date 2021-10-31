@@ -183,6 +183,7 @@ uint8_t lis3_get_acc_y_l();
 int8_t lis3_get_acc_z_h();
 uint8_t lis3_get_acc_z_l();
 
+//16 bit alignment functions
 int16_t lis3_get_acc_x();
 int16_t lis3_get_acc_y();
 int16_t lis3_get_acc_z();
